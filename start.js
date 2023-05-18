@@ -1,8 +1,9 @@
 const express = require("express");
 const path = require("path");
 const http = require("http");
+const https = require('https')
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(app);
 const io = require("socket.io")(server);
 
 const signallingServer = require("./server/signalling-server.js");
