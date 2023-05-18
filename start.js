@@ -4,6 +4,7 @@ const http = require("http");
 const https = require('https')
 const app = express();
 const server = https.createServer(app);
+const server2 = http.createServer(app);
 const io = require("socket.io")(server);
 
 const signallingServer = require("./server/signalling-server.js");
@@ -21,6 +22,12 @@ server.listen(PORT, null, () => {
 	console.log("Tlk server started");
 	console.log({ port: PORT, node_version: process.versions.node });
 });
+
+server2.listen(PORT, null, () => {
+	console.log("Tlk server started");
+	console.log({ port: PORT, node_version: process.versions.node });
+});
+
 
 // serve the landing page
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "www/index.html")));
