@@ -7,7 +7,7 @@ const https = require('https')
 const app = express();
 const options = {
     key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('nodem.pem')
+    cert: fs.readFileSync('cert.pem')
 }
 const server = https.createServer(options,app);
 const server2 = http.createServer(app);
