@@ -3,6 +3,29 @@
 "use strict";
 
 const App = Vue.createApp({
+	created() {
+	
+
+	  },  
+	  mounted() {
+	// Get the URL query string
+	const queryString = window.location.search.substring(1);
+	console.log(queryString);
+
+	// Parse the query string into an object
+	const params = this.parseQueryString(queryString);
+	
+	console.log(params);
+	// Access the individual parameters
+	const param1 = params.name;
+	window.localStorage.name = param1;
+	window.localStorage.hash = params.url;
+
+	console.log(param1);
+	
+	window.onload = () => {
+		this.initiateCall(); // Call the method when the HTML window has finished loading
+	  };	  },
 	data() {
 		return {
 			peerId: "",
@@ -30,9 +53,28 @@ const App = Vue.createApp({
 			chats: [],
 			callInitiated: false,
 			callEnded: false,
+			hash: ""
 		};
 	},
 	methods: {
+		parseQueryString(queryString) {
+			const params = {};
+			
+			// Split the query string into individual parameters
+			const pairs = queryString.split('&');
+			
+			// Loop through each parameter
+			for (let i = 0; i < pairs.length; i++) {
+			  const pair = pairs[i].split('=');
+			  const key = decodeURIComponent(pair[0]);
+			  const value = decodeURIComponent(pair[1] || '');
+			  
+			  // Store the parameter in the object
+			  params[key] = value;
+			}
+			
+			return params;
+		  },
 		initiateCall() {
 			if (this.name) {
 				this.callInitiated = true;
@@ -42,7 +84,7 @@ const App = Vue.createApp({
 			}
 		},
 		copyURL() {
-			navigator.clipboard.writeText(this.roomLink).then(
+			navigator.clipboard.writeText(this.roomLink + '?name=Convidado(a)').then(
 				() => {
 					this.copyText = "Copied 👍";
 					setTimeout(() => (this.copyText = ""), 3000);
@@ -294,6 +336,9 @@ const App = Vue.createApp({
 				peers[peer_id].close();
 			}
 			this.callEnded = true;
+			console.log(window.localStorage.hash);
+
+			window.top.location.href = window.localStorage.hash;
 		},
 	},
 }).mount("#app");

@@ -41,43 +41,23 @@
 		<section id="videos"></section>
 		<main id="app">
 			<div id="appWrap" v-bind:style="'display:block;'">
-				<div id="intro" v-if="!callInitiated && !showChat && !showSettings">
-					<h3>You are about to enter a video call.</h3>
-					<p>Tlk is a free, peer-to-peer, encrypted, open-source video calling for the web.</p>
+				<div id="intro" v-if="false">
+					<h3>Teleconsulta</h3>
 					<p>
-						<label v-bind:class="(nameError && !name ? 'red' : '')">Please enter your name</label>
+						<label v-bind:class="(nameError && !name ? 'red' : '')">Informe seu nome</label>
 						<input type="text" v-model="name" v-on:keyup="updateName" placeholder="Your name" />
 					</p>
 					<br />
 
 					<div class="footer">
-						<iframe
-							src="https://ghbtns.com/github-btn.html?user=vasanthv&repo=tlk&type=star&count=true&size=large"
-							frameborder="0"
-							scrolling="0"
-							width="170"
-							height="30"
-							title="GitHub"
-						></iframe>
-
-						<button v-on:click="initiateCall">Proceed</button>
+						<button v-on:click="initiateCall">Entrar</button>
 					</div>
 				</div>
 
 				<div id="callFeedbackWrap" v-if="callEnded">
 					<div id="callFeedback">
-						<div class="bold">Your call has been disconnected. You can now close this window.</div>
-						<br />
-
-						<div id="feedbackWrap">
-							<div class="question italic">How was the quality of call?</div>
-							<div class="thankYou bold">Thank you for your feedback</div>
-							<div id="feedbackButtons">
-								<button data-cabin-event="call-quality-nah" v-on:click="onCallFeedback">😟<br />Nah!</button>
-								<button data-cabin-event="call-quality-meh" v-on:click="onCallFeedback">😐<br />Meh!</button>
-								<button data-cabin-event="call-quality-yay" v-on:click="onCallFeedback">😀<br />Yay!</button>
-							</div>
-						</div>
+						<div class="bold">Sua teleconsulta encerrou!</div>
+						<br />				
 					</div>
 				</div>
 
@@ -88,10 +68,10 @@
 							<span class="date light"> &middot; {{formatDate(chat.date)}}</span>
 							<div class="message" v-html="linkify(chat.message)"></div>
 						</div>
-						<div id="noChat" class="light" v-if="!chats.length"><small>No chat messages.</small></div>
+						<div id="noChat" class="light" v-if="!chats.length"><small>Sem mensagem no chat.</small></div>
 					</div>
 					<div id="composeBox">
-						<div id="placeholder" v-if="typing.length <= 0">Type message...</div>
+						<div id="placeholder" v-if="typing.length <= 0">Digite uma mensagem...</div>
 						<div
 							id="compose"
 							contenteditable="true"
@@ -100,17 +80,17 @@
 							v-on:paste="paste($event)"
 						></div>
 					</div>
-					<small class="light">Press enter to submit</small>
+					<small class="light">Pressione enter para enviar</small>
 				</div>
 
 				<div id="settings" v-if="showSettings">
 					<div id="name" class="label">
-						<span>Name:</span>
-						<input type="text" placeholder="Enter your name" v-model="name" v-on:keyup="updateNameAndPublish" />
+						<span>Nome:</span>
+						<input type="text" placeholder="Informe seu nome" v-model="name" v-on:keyup="updateNameAndPublish" />
 					</div>
 					<hr class="separator" />
 
-					<div class="label">Camera 📹</div>
+					<div class="label">Câmera 📹</div>
 					<div v-for="(videoDevice, i) in videoDevices" v-bind:key="videoDevice.deviceId">
 						<div
 							v-bind:class="'link indent '+(selectedVideoDeviceId === videoDevice.deviceId ? 'active' : '')"
@@ -121,7 +101,7 @@
 					</div>
 					<hr class="separator" />
 
-					<div class="label">Microphone 🎙️</div>
+					<div class="label">Microfone 🎙️</div>
 					<div v-for="(audioDevice, i) in audioDevices" v-bind:key="audioDevice.deviceId">
 						<div
 							v-bind:class="'link indent '+(selectedAudioDeviceId === audioDevice.deviceId ? 'active' : '')"
@@ -132,11 +112,11 @@
 					</div>
 					<hr class="separator" />
 
-					<div class="link" v-on:click="copyURL">{{copyText || "Copy room link"}}</div>
+					<!-- <div class="link" v-on:click="copyURL">{{copyText || "Copiar link da reunião"}}</div> -->
 					<hr class="separator" />
 					<div class="link" v-on:click="toggleSelfVideoMirror">
-						Mirror / Unmirror
-						<small class="light">(self-view)</small>
+						Espelhar câmera
+						<small class="light"></small>
 					</div>
 				</div>
 
