@@ -8,7 +8,7 @@ const io = require("socket.io")(server);
 const signallingServer = require("./server/signalling-server.js");
 
 // Get PORT from env variable else assign 3000 for development
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 30851;
 
 // Server all the static files from www folder
 app.use(express.static(path.join(__dirname, "www")));
