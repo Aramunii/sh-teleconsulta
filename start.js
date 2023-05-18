@@ -23,10 +23,6 @@ server.listen(PORT, null, () => {
 	console.log({ port: PORT, node_version: process.versions.node });
 });
 
-server2.listen(PORT, null, () => {
-	console.log("Tlk server started");
-	console.log({ port: PORT, node_version: process.versions.node });
-});
 
 
 // serve the landing page
