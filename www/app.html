@@ -41,7 +41,7 @@
 		<section id="videos"></section>
 		<main id="app">
 			<div id="appWrap" v-bind:style="'display:block;'">
-				<div id="intro" v-if="false">
+				<div id="intro" v-if="!callInitiated && !showChat && !showSettings">
 					<h3>Teleconsulta</h3>
 					<p>
 						<label v-bind:class="(nameError && !name ? 'red' : '')">Informe seu nome</label>

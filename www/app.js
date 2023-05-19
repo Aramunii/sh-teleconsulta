@@ -23,9 +23,7 @@ const App = Vue.createApp({
 
 	console.log(param1);
 	
-	window.onload = () => {
-		this.initiateCall(); // Call the method when the HTML window has finished loading
-	  };	  },
+	},
 	data() {
 		return {
 			peerId: "",

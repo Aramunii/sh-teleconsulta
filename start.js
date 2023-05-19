@@ -5,6 +5,7 @@ const path = require("path");
 const http = require("http");
 const https = require('https')
 const app = express();
+
 const options = {
     cert: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/fullchain.pem','utf8'),
     key: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/privkey.pem','utf8')
