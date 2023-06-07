@@ -253,8 +253,8 @@ function setupLocalMedia(callback, errorback) {
 		  if (device.kind === 'videoinput') {
 			console.log(device.deviceId);
 
-			x = device.deviceId;
-	var constraints = { deviceId: { exact: x } };
+			var x = device.deviceId;
+			var constraints = { deviceId: { exact: x } };
 
 			navigator.mediaDevices
 		.getUserMedia({ audio: USE_AUDIO, video: constraints })
