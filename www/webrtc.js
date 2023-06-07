@@ -247,25 +247,27 @@ function setupLocalMedia(callback, errorback) {
 		return;
 	}
 
-	navigator.mediaDevices
-		.getUserMedia({ audio: USE_AUDIO, video: USE_VIDEO })
-		.then((stream) => {
-			localMediaStream = stream;
-			const localMedia = getVideoElement(App.peerId, true);
-			attachMediaStream(localMedia, stream);
-			resizeVideos();
-			if (callback) callback();
+	navigator.mediaDevices.enumerateDevices().then((devices) => {
+		App.videoDevices = devices.filter((device) => device.kind === "videoinput" && device.deviceId !== "default");
+		App.audioDevices = devices.filter((device) => device.kind === "audioinput" && device.deviceId !== "default");
+	});
 
-			navigator.mediaDevices.enumerateDevices().then((devices) => {
-				App.videoDevices = devices.filter((device) => device.kind === "videoinput" && device.deviceId !== "default");
-				App.audioDevices = devices.filter((device) => device.kind === "audioinput" && device.deviceId !== "default");
-			});
-		})
-		.catch(() => {
-			/* user denied access to a/v */
-			alert("This site will not work without camera/microphone access.");
-			if (errorback) errorback();
-		});
+	// navigator.mediaDevices
+	// 	.getUserMedia({ audio: USE_AUDIO, video: USE_VIDEO })
+	// 	.then((stream) => {
+	// 		localMediaStream = stream;
+	// 		const localMedia = getVideoElement(App.peerId, true);
+	// 		attachMediaStream(localMedia, stream);
+	// 		resizeVideos();
+	// 		if (callback) callback();
+
+	
+	// 	})
+	// 	.catch(() => {
+	// 		/* user denied access to a/v */
+	// 		alert("This site will not work without camera/microphone access.");
+	// 		if (errorback) errorback();
+	// 	});
 }
 
 const getVideoElement = (peerId, isLocal) => {
