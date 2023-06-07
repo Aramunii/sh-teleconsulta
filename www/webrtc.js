@@ -247,13 +247,6 @@ function setupLocalMedia(callback, errorback) {
 		return;
 	}
 
-	navigator.mediaDevices.enumerateDevices().then((devices) => {
-		App.videoDevices = devices.filter((device) => device.kind === "videoinput" && device.deviceId !== "default");
-		App.audioDevices = devices.filter((device) => device.kind === "audioinput" && device.deviceId !== "default");
-	});
-
-
-	
 	navigator.mediaDevices
 		.getUserMedia({ audio: false, video: USE_VIDEO })
 		.then((stream) => {
@@ -262,6 +255,11 @@ function setupLocalMedia(callback, errorback) {
 			attachMediaStream(localMedia, stream);
 			resizeVideos();
 			if (callback) callback();
+
+			navigator.mediaDevices.enumerateDevices().then((devices) => {
+				App.videoDevices = devices.filter((device) => device.kind === "videoinput" && device.deviceId !== "default");
+				App.audioDevices = devices.filter((device) => device.kind === "audioinput" && device.deviceId !== "default");
+			});
 		})
 		.catch(() => {
 			/* user denied access to a/v */
