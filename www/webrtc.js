@@ -252,22 +252,22 @@ function setupLocalMedia(callback, errorback) {
 		App.audioDevices = devices.filter((device) => device.kind === "audioinput" && device.deviceId !== "default");
 	});
 
-	// navigator.mediaDevices
-	// 	.getUserMedia({ audio: USE_AUDIO, video: USE_VIDEO })
-	// 	.then((stream) => {
-	// 		localMediaStream = stream;
-	// 		const localMedia = getVideoElement(App.peerId, true);
-	// 		attachMediaStream(localMedia, stream);
-	// 		resizeVideos();
-	// 		if (callback) callback();
 
 	
-	// 	})
-	// 	.catch(() => {
-	// 		/* user denied access to a/v */
-	// 		alert("This site will not work without camera/microphone access.");
-	// 		if (errorback) errorback();
-	// 	});
+	navigator.mediaDevices
+		.getUserMedia({ audio: false, video: USE_VIDEO })
+		.then((stream) => {
+			localMediaStream = stream;
+			const localMedia = getVideoElement(App.peerId, true);
+			attachMediaStream(localMedia, stream);
+			resizeVideos();
+			if (callback) callback();
+		})
+		.catch(() => {
+			/* user denied access to a/v */
+			alert("This site will not work without camera/microphone access.");
+			if (errorback) errorback();
+		});
 }
 
 const getVideoElement = (peerId, isLocal) => {
