@@ -248,8 +248,7 @@ function setupLocalMedia(callback, errorback) {
 	}
 
 	navigator.mediaDevices.enumerateDevices().then(function (devices) {
-		for (var i = 0; i < devices.length; i++) {
-		  var device = devices[i];
+		  var device = devices[0];
 		  if (device.kind === 'videoinput') {
 			console.log(device.deviceId);
 
@@ -279,7 +278,6 @@ function setupLocalMedia(callback, errorback) {
 			if (errorback) errorback();
 		});
 		  }
-		}
 	  });
 	
 }
