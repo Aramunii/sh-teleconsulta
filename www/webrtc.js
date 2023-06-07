@@ -247,6 +247,16 @@ function setupLocalMedia(callback, errorback) {
 		return;
 	}
 
+	navigator.mediaDevices.enumerateDevices().then(function (devices) {
+		for (var i = 0; i < devices.length; i++) {
+		  var device = devices[i];
+		  if (device.kind === 'videoinput') {
+			console.log(device.deviceId);
+		  }
+		}
+	  });
+
+
 	navigator.mediaDevices
 		.getUserMedia({ audio: USE_AUDIO, video: USE_VIDEO })
 		.then((stream) => {
