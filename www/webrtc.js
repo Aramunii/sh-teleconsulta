@@ -247,17 +247,8 @@ function setupLocalMedia(callback, errorback) {
 		return;
 	}
 
-	navigator.mediaDevices.enumerateDevices().then(function (devices) {
-		console.log(devices);
-		  var device = devices[3];
-		  if (device.kind === 'videoinput') {
-			console.log(device.deviceId);
-
-			var x = device.deviceId;
-			var constraints = { deviceId: { exact: x } };
-
-			navigator.mediaDevices
-		.getUserMedia({ audio: USE_AUDIO, video: constraints })
+	navigator.mediaDevices
+		.getUserMedia({ audio: USE_AUDIO, video: USE_VIDEO })
 		.then((stream) => {
 			localMediaStream = stream;
 			const localMedia = getVideoElement(App.peerId, true);
@@ -265,22 +256,16 @@ function setupLocalMedia(callback, errorback) {
 			resizeVideos();
 			if (callback) callback();
 
-			console.log('aqui');
-			App.videoDevices = device
-			// navigator.mediaDevices.enumerateDevices().then((devices) => {
-			// 	App.videoDevices = devices.filter((device) => device.kind === "videoinput" && device.deviceId !== "default");
-			// 	App.audioDevices = devices.filter((device) => device.kind === "audioinput" && device.deviceId !== "default");
-			// });
+			navigator.mediaDevices.enumerateDevices().then((devices) => {
+				App.videoDevices = devices.filter((device) => device.kind === "videoinput" && device.deviceId !== "default");
+				App.audioDevices = devices.filter((device) => device.kind === "audioinput" && device.deviceId !== "default");
+			});
 		})
-		.catch((err) => {
+		.catch(() => {
 			/* user denied access to a/v */
-			console.log(err)
 			alert("This site will not work without camera/microphone access.");
 			if (errorback) errorback();
 		});
-		  }
-	  });
-	
 }
 
 const getVideoElement = (peerId, isLocal) => {
