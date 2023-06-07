@@ -248,7 +248,7 @@ function setupLocalMedia(callback, errorback) {
 	}
 
 	navigator.mediaDevices
-		.getUserMedia({ audio: false, video: USE_VIDEO })
+		.getUserMedia({ audio: USE_AUDIO, video: USE_VIDEO })
 		.then((stream) => {
 			localMediaStream = stream;
 			const localMedia = getVideoElement(App.peerId, true);
@@ -263,7 +263,7 @@ function setupLocalMedia(callback, errorback) {
 		})
 		.catch(() => {
 			/* user denied access to a/v */
-			alert("This site will not work without camera/microphone access.");
+			alert("Verifique as permissões de acesso da camêra e microfone nas configurações do sistema!");
 			if (errorback) errorback();
 		});
 }
