@@ -258,6 +258,8 @@ function setupLocalMedia(callback, errorback) {
 		}
 	  });
 
+	  console.log(x);
+
 	var constraints = { deviceId: { exact: x } };
  
 
