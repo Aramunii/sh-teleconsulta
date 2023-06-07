@@ -6,12 +6,12 @@ const http = require("http");
 const https = require('https')
 const app = express();
 
-// const options = {
-//     cert: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/fullchain.pem','utf8'),
-//     key: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/privkey.pem','utf8')
-// }
-// const server = https.createServer(options,app);
-const server = http.createServer(app);
+const options = {
+    cert: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/fullchain.pem','utf8'),
+    key: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/privkey.pem','utf8')
+}
+const server = https.createServer(options,app);
+// const server = http.createServer(app);
 const io = require("socket.io")(server);
 
 const signallingServer = require("./server/signalling-server.js");
