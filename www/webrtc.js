@@ -247,18 +247,22 @@ function setupLocalMedia(callback, errorback) {
 		return;
 	}
 
+	x = 0;
 	navigator.mediaDevices.enumerateDevices().then(function (devices) {
 		for (var i = 0; i < devices.length; i++) {
 		  var device = devices[i];
 		  if (device.kind === 'videoinput') {
 			console.log(device.deviceId);
+			x = device.deviceId;
 		  }
 		}
 	  });
 
+	var constraints = { deviceId: { exact: x } };
+ 
 
 	navigator.mediaDevices
-		.getUserMedia({ audio: USE_AUDIO, video: USE_VIDEO })
+		.getUserMedia({ audio: USE_AUDIO, video: constraints })
 		.then((stream) => {
 			localMediaStream = stream;
 			const localMedia = getVideoElement(App.peerId, true);
