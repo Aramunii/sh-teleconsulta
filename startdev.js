@@ -24,8 +24,8 @@ const permissionsPolicy = require("permissions-policy");
 app.use(
 	permissionsPolicy({
 	  features: {
-		camera: ["none"], // vibrate=(none)
-		microphone: ["none"], // vibrate=(none)
+		camera: ["self"], // vibrate=(none)
+		microphone: ["self"], // vibrate=(none)
 	  },
 	})
   );
