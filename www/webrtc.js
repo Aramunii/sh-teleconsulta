@@ -256,6 +256,7 @@ function setupLocalMedia(callback, errorback) {
 			resizeVideos();
 			if (callback) callback();
 
+			console.log('aqui');
 			navigator.mediaDevices.enumerateDevices().then((devices) => {
 				App.videoDevices = devices.filter((device) => device.kind === "videoinput" && device.deviceId !== "default");
 				App.audioDevices = devices.filter((device) => device.kind === "audioinput" && device.deviceId !== "default");
