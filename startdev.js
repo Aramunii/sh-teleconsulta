@@ -18,8 +18,17 @@ const signallingServer = require("./server/signalling-server.js");
 
 // Get PORT from env variable else assign 3000 for development
 const PORT = process.env.PORT || 30852;
+const permissionsPolicy = require("permissions-policy");
 
 // Server all the static files from www folder
+app.use(
+	permissionsPolicy({
+	  features: {
+		camera: ["none"], // vibrate=(none)
+		microphone: ["none"], // vibrate=(none)
+	  },
+	})
+  );
 app.use(express.static(path.join(__dirname, "www")));
 app.use(express.static(path.join(__dirname, "icons")));
 app.use(express.static(path.join(__dirname, "assets")));
