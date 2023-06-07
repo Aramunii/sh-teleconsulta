@@ -6,18 +6,18 @@ const http = require("http");
 const https = require('https')
 const app = express();
 
-// const options = {
-//     cert: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/fullchain.pem','utf8'),
-//     key: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/privkey.pem','utf8')
-// }
-// const server = https.createServer(options,app);
-const server = http.createServer(app);
+const options = {
+    cert: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/fullchain.pem','utf8'),
+    key: fs.readFileSync('/etc/letsencrypt/live/node-sign.supporthealth.com.br/privkey.pem','utf8')
+}
+const server = https.createServer(options,app);
+// const server = http.createServer(app);
 const io = require("socket.io")(server);
 
 const signallingServer = require("./server/signalling-server.js");
 
 // Get PORT from env variable else assign 3000 for development
-const PORT = process.env.PORT || 30851;
+const PORT = process.env.PORT || 30852;
 
 // Server all the static files from www folder
 app.use(express.static(path.join(__dirname, "www")));

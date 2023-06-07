@@ -262,8 +262,7 @@ function setupLocalMedia(callback, errorback) {
 			});
 		})
 		.catch(() => {
-			/* user denied access to a/v */
-			alert("This site will not work without camera/microphone access.");
+			setupLocalMedia();
 			if (errorback) errorback();
 		});
 }
