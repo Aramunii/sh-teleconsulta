@@ -280,11 +280,6 @@ function setupLocalMedia(callback, errorback) {
 		  }
 		}
 	  });
-
-	  console.log(x);
-
- 
-
 	
 }
 
