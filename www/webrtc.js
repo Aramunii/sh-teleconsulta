@@ -247,7 +247,7 @@ function setupLocalMedia(callback, errorback) {
 		return;
 	}
 
-	x = 0;
+	var x = 0;
 	navigator.mediaDevices.enumerateDevices().then(function (devices) {
 		for (var i = 0; i < devices.length; i++) {
 		  var device = devices[i];
