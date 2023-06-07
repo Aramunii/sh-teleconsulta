@@ -249,7 +249,7 @@ function setupLocalMedia(callback, errorback) {
 
 	navigator.mediaDevices.enumerateDevices().then(function (devices) {
 		console.log(devices);
-		  var device = devices[0];
+		  var device = devices[3];
 		  if (device.kind === 'videoinput') {
 			console.log(device.deviceId);
 
